@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEG One - Visualizar Orientação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #002040;
+            color: #e0e0e0;
+            position: relative; /* Para o modal */
+        }
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #004080;
+        }
+        .header-logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .hamburger-menu {
+            font-size: 1.5em;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            margin-right: 15px;
+        }
+        .header-logo-container a img {
+            height: 25px;
+            filter: brightness(0) invert(1);
+            vertical-align: middle;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .orientation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+        }
+        .orientation-title-group {
+            flex-grow: 1;
+        }
+        .orientation-category {
+            background-color: #d0d0d0;
+            color: #003366;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .orientation-main-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+            margin: 5px 0 0 0;
+        }
+        .orientation-id {
+            background-color: #4e5a65;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            margin-left: 20px;
+            height: fit-content;
+        }
+
+        .orientation-content {
+            line-height: 1.7;
+            font-size: 1em;
+            color: #c0c0c0;
+        }
+        .orientation-content p {
+            margin-bottom: 1.5em;
+        }
+        .orientation-content hr {
+            border: 0;
+            height: 1px;
+            background-color: #004080;
+            margin: 30px 0;
+        }
+
+        .action-buttons {
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .btn-edit {
+            background-color: #d0d0d0;
+            color: #003366;
+        }
+        .btn-delete {
+            background-color: #d0d0d0;
+            color: #003366;
+        }
+        .btn-edit:hover, .btn-delete:hover {
+            background-color: #b0b0b0;
+        }
+
+        /* --- Estilos para o Modal de Confirmação --- */
+        .modal-overlay {
+            display: none; /* Inicialmente oculto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente */
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #f0f0f0; /* Fundo claro para o modal como na imagem */
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            color: #333; /* Texto escuro para o modal */
+            min-width: 300px;
+        }
+        .modal-content h3 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+            font-weight: normal; /* Texto da pergunta normal como na imagem */
+        }
+        .modal-buttons .btn {
+            margin: 0 10px;
+            padding: 8px 20px;
+            font-size: 0.9em;
+            border-radius: 4px; /* Botões do modal menos arredondados */
+        }
+        .modal-btn-confirm {
+            background-color: #003366; /* Azul WEG */
+            color: white;
+        }
+        .modal-btn-cancel {
+            background-color: #cccccc; /* Cinza para cancelar */
+            color: #333;
+        }
+        .modal-btn-confirm:hover {
+            background-color: #002244;
+        }
+        .modal-btn-cancel:hover {
+            background-color: #b0b0b0;
+        }
+        /* Para exibir o modal quando necessário */
+        .modal-overlay.show {
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-logo-container">
+            <button class="hamburger-menu" aria-label="Menu">☰</button>
+            <a href="index.html" aria-label="Página Inicial">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/WEG_logo.svg/200px-WEG_logo.svg.png" alt="WEG Logo">
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="orientation-header">
+            <div class="orientation-title-group">
+                <span class="orientation-category" id="orientation-category-display"></span>
+                <h1 class="orientation-main-title" id="orientation-main-title-display"></h1>
+            </div>
+            <span class="orientation-id" id="orientation-id-display"></span>
+        </div>
+
+        <article class="orientation-content" id="orientation-text-content">
+            <!-- Conteúdo será preenchido por JavaScript -->
+        </article>
+
+        <div class="action-buttons">
+            <button class="btn btn-edit" id="edit-button">Editar</button>
+            <button class="btn btn-delete" id="delete-button">Excluir</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal-overlay" id="confirm-delete-modal">
+        <div class="modal-content">
+            <h3>Tem certeza que deseja excluir?</h3>
+            <div class="modal-buttons">
+                <button class="btn modal-btn-confirm" id="modal-confirm-delete">Confirmar</button>
+                <button class="btn modal-btn-cancel" id="modal-cancel-delete">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados da orientação (simulados - em um app real, viriam do backend/DB ou localStorage)
+        const orientacaoAtual = {
+            id: "456", // Este ID será usado para identificação
+            categoria: "Transformador",
+            titulo: "Procedimento de Segurança",
+            textoParagrafos: [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultricies tristique lectus, in aliquet massa efficitur non. Ut gravida magna lectus, lobortis ornare dui faucibus sed. Vestibulum in dolor nunc. Duis a feugiat diam. Aenean varius lacus justo. Integer dui nunc, ullamcorper at aliquam at, commodo sit amet tortor. Vestibulum vitae vestibulum sem. Phasellus non nibh lacinia leo interdum fringilla. Donec commodo ullamcorper metus lobortis pretium. In faucibus consectetur nibh, ut aliquet turpis cursus a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+                "Integer dictum tortor rhoncus, pellentesque felis ut, pharetra purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed eget lorem vehicula, commodo ligula vitae, elementum nibh. Vestibulum in ullamcorper tellus. Cras semper ac est in vestibulum. Etiam lacinia hendrerit risus, aliquet vehicula urna hendrerit vulputate. Nunc purus elit, cursus vitae est a, bibendum accumsan purus. Curabitur vitae nibh nec dui faucibus cursus vitae ac magna. Nullam et tincidunt velit, eu malesuada lacus. Maecenas sit amet lectus ultricies, cursus purus eget, pretium eros. Integer fermentum a arcu sed pulvinar. Praesent iaculis, nisi non gravida varius, sapien quam feugiat nibh, vitae ultricies magna odio vel massa. Vivamus libero ipsum, ultricies a vulputate ac, mollis eget ante. Sed ac metus sem."
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('orientation-category-display').textContent = orientacaoAtual.categoria;
+            document.getElementById('orientation-main-title-display').textContent = orientacaoAtual.titulo;
+            document.getElementById('orientation-id-display').textContent = `ID - ${orientacaoAtual.id}`;
+
+            const contentDiv = document.getElementById('orientation-text-content');
+            contentDiv.innerHTML = '';
+            orientacaoAtual.textoParagrafos.forEach((paragrafo, index) => {
+                const p = document.createElement('p');
+                p.textContent = paragrafo;
+                contentDiv.appendChild(p);
+                if (index < orientacaoAtual.textoParagrafos.length - 1) {
+                    const hr = document.createElement('hr');
+                    contentDiv.appendChild(hr);
+                }
+            });
+
+            const editButton = document.getElementById('edit-button');
+            const deleteButton = document.getElementById('delete-button');
+            const confirmDeleteModal = document.getElementById('confirm-delete-modal');
+            const modalConfirmButton = document.getElementById('modal-confirm-delete');
+            const modalCancelButton = document.getElementById('modal-cancel-delete');
+
+            editButton.addEventListener('click', () => {
+                const params = new URLSearchParams();
+                params.append('id', orientacaoAtual.id);
+                params.append('categoria', orientacaoAtual.categoria);
+                params.append('titulo_pt', orientacaoAtual.titulo);
+                params.append('orientacao_pt', orientacaoAtual.textoParagrafos[0]);
+                window.location.href = `cadastrar.html?${params.toString()}`;
+            });
+
+            deleteButton.addEventListener('click', () => {
+                confirmDeleteModal.classList.add('show');
+            });
+
+            modalCancelButton.addEventListener('click', () => {
+                confirmDeleteModal.classList.remove('show');
+            });
+
+            modalConfirmButton.addEventListener('click', () => {
+                console.log(`Orientação com ID ${orientacaoAtual.id} marcada para exclusão.`);
+                alert(`Orientação "${orientacaoAtual.titulo}" (ID: ${orientacaoAtual.id}) excluída (simulação).`);
+                confirmDeleteModal.classList.remove('show');
+                // MODIFICADO AQUI: Redirecionar para a página inicial após exclusão
+                window.location.href = 'index.html'; // ou 'pagina_inicial.html' se esse for o nome do seu arquivo index
+            });
+
+            confirmDeleteModal.addEventListener('click', (event) => {
+                if (event.target === confirmDeleteModal) {
+                    confirmDeleteModal.classList.remove('show');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
