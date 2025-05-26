@@ -1,0 +1,148 @@
+        /* Estilos básicos para demonstração - coloque em um arquivo CSS separado */
+        body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f4f4; }
+        .header { background-color: #003366; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header-logo { display: flex; align-items: center; } /* Adicionado para alinhar logo e menu hamburguer */
+        .header-logo a img {
+            height: 25px;
+            filter: brightness(0) invert(1);
+            vertical-align: middle; /* Garante alinhamento vertical */
+        }
+        .hamburger-menu {
+            font-size: 1.5em;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            margin-right: 15px; /* Espaço entre menu hamburguer e logo */
+        }
+
+        /* --- Estilos para o Seletor de Idiomas --- */
+        .lang-selector {
+            position: relative;
+            display: inline-block;
+        }
+        .current-lang {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .current-lang img {
+            height: 24px;
+            margin-right: 5px;
+            border: 1px solid #FFF;
+        }
+        .current-lang .arrow {
+            font-size: 0.9em;
+            color: white;
+        }
+        .lang-dropdown {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            background-color: #003366;
+            border: 1px solid #002a50;
+            width: 190px;
+            z-index: 1000;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            display: none;
+        }
+        .lang-dropdown.show {
+            display: block;
+        }
+        .lang-dropdown li a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85em;
+            border-bottom: 1px solid #004080;
+            text-transform: uppercase;
+        }
+        .lang-dropdown li:last-child a {
+            border-bottom: none;
+        }
+        .lang-dropdown li a:hover {
+            background-color: #004477;
+        }
+        .lang-dropdown li img {
+            height: 16px;
+            margin-right: 10px;
+            border: 1px solid #EEE;
+        }
+        /* --- Fim dos Estilos do Seletor de Idiomas --- */
+
+        .welcome-and-search-bar {
+            background-color: #003366;
+            color: white;
+            padding-bottom: 20px;
+        }
+        .main-title-in-bar { text-align: center; padding-top: 30px; padding-bottom: 20px; }
+        .main-title-in-bar h1 { margin: 0; font-size: 2.5em; display: flex; justify-content: center; align-items: center; }
+        .main-title-in-bar img { height: 50px; margin-left: 15px; filter: brightness(0) invert(1); }
+        .search-container-in-bar {
+            padding: 0 20px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .search-container-in-bar input[type="search"] {
+            width: 100%;
+            max-width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #002855; /* Cor de fundo do campo de busca ligeiramente diferente da barra */
+            color: #ccc;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        .search-container-in-bar input[type="search"]::placeholder {
+            color: #a0a0a0;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .orientations-list {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 0 0 5px 5px;
+            margin-top: 0; /* Remove margem superior se estiver logo abaixo da barra de busca */
+        }
+        .orientation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .orientation-item:last-child {
+            border-bottom: none;
+        }
+        .orientation-info .title { font-weight: bold; font-size: 1.1em; color: #333; }
+        .orientation-info .type { font-size: 0.9em; color: #666; }
+
+        /* Estilos para o link de visualização da orientação (antigo botão) */
+        .orientation-actions .view-orientation-link {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #666;
+            text-decoration: none;
+            padding: 5px;
+            display: inline-block;
+        }
+        .orientation-actions .view-orientation-link:hover {
+            color: #333;
+        }
+
+        .page-actions { text-align: center; padding: 20px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; margin: 0 10px; }
+        .btn-primary { background-color: #0056b3; color: white; }
+        .btn-secondary { background-color: #6c757d; color: white; }
