@@ -6,6 +6,7 @@
     <title>WEG One - Cadastrar/Editar Orientação</title>
     <link rel="stylesheet" href="/FrontEnd/cadastrar.css">
     <link rel="shortcut icon" href="/FrontEnd/image/logoWeg.png" type="image/x-icon">
+    <script src="/FrontEnd/cadastrar.js" defer></script>
 </head>
 <body>
 
@@ -91,82 +92,6 @@
                 <button class="btn modal-btn-cancel" id="modal-cancel-save">Cancelar</button>
             </div>
         </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('orientation-form');
-            const saveButton = document.getElementById('save-button');
-            const confirmSaveModal = document.getElementById('confirm-save-modal');
-            const modalConfirmButton = document.getElementById('modal-confirm-save');
-            const modalCancelButton = document.getElementById('modal-cancel-save');
-            const idDisplayField = document.getElementById('id-type-display-field');
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const orientationId = urlParams.get('id');
-
-            if (orientationId) {
-                document.getElementById('orientation-id').value = orientationId;
-                idDisplayField.textContent = `ID - ${orientationId}`;
-                
-                const titlePt = urlParams.get('titulo_pt');
-                if (titlePt) document.getElementById('title-pt').value = titlePt;
-
-                const orientationPt = urlParams.get('orientacao_pt');
-                if (orientationPt) document.getElementById('orientation-pt').value = orientationPt;
-
-                const categoria = urlParams.get('categoria');
-                if (categoria) {
-                    let typeValue = '';
-                    if (categoria.toLowerCase().includes('segurança') || categoria.toLowerCase().includes('procedimento')) {
-                        typeValue = 'procedimento_seguranca';
-                    } else if (categoria.toLowerCase().includes('operação') || categoria.toLowerCase().includes('manual')) {
-                         typeValue = 'manual_operacao';
-                    } else if (categoria.toLowerCase().includes('conduta')) {
-                         typeValue = 'manual_conduta';
-                    }
-
-                    if (typeValue) {
-                        const checkbox = document.querySelector(`.checkbox-group input[name="type"][value="${typeValue}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    }
-                }
-                document.title = "WEG One - Editar Orientação";
-            } else {
-                idDisplayField.textContent = "ID - NOVO";
-            }
-
-            saveButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                confirmSaveModal.classList.add('show');
-            });
-
-            // Ação do botão CANCELAR no modal
-            modalCancelButton.addEventListener('click', () => {
-                confirmSaveModal.classList.remove('show'); // Apenas fecha o modal
-            });
-
-            // Ação do botão CONFIRMAR no modal
-            modalConfirmButton.addEventListener('click', () => {
-                const formData = new FormData(form);
-                console.log("Dados a serem salvos:");
-                for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
-                
-                alert('Alterações salvas (simulação)! Redirecionando...');
-                confirmSaveModal.classList.remove('show');
-                window.location.href = 'index.html'; // Redireciona para o Index
-            });
-
-            // Ação ao clicar FORA do conteúdo do modal (no overlay)
-            confirmSaveModal.addEventListener('click', (event) => {
-                if (event.target === confirmSaveModal) {
-                    confirmSaveModal.classList.remove('show'); // Apenas fecha o modal
-                }
-            });
-        });
-    </script>
-
+    </div>\
 </body>
 </html>
