@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEG One - Boas-vindas</title>
+    <title>WEG One - Busca Avançada</title>
     <style>
-        /* Estilos básicos para demonstração - coloque em um arquivo CSS separado */
+        /* Estilos reutilizados da pagina_inicial.html */
         body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f4f4; }
         .header { background-color: #003366; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .header-logo { display: flex; align-items: center; } /* Adicionado para alinhar logo e menu hamburguer */
+        .header-logo { display: flex; align-items: center; }
         .header-logo a img {
             height: 25px;
             filter: brightness(0) invert(1);
-            vertical-align: middle; /* Garante alinhamento vertical */
+            vertical-align: middle;
         }
         .hamburger-menu {
             font-size: 1.5em;
@@ -20,10 +20,9 @@
             cursor: pointer;
             background: none;
             border: none;
-            margin-right: 15px; /* Espaço entre menu hamburguer e logo */
+            margin-right: 15px;
         }
 
-        /* --- Estilos para o Seletor de Idiomas --- */
         .lang-selector {
             position: relative;
             display: inline-block;
@@ -81,7 +80,6 @@
             margin-right: 10px;
             border: 1px solid #EEE;
         }
-        /* --- Fim dos Estilos do Seletor de Idiomas --- */
 
         .welcome-and-search-bar {
             background-color: #003366;
@@ -98,11 +96,10 @@
         }
         .search-container-in-bar input[type="search"] {
             width: 100%;
-            max-width: 100%;
             padding: 10px 15px;
             border: none;
             border-radius: 4px;
-            background-color: #002855; /* Cor de fundo do campo de busca ligeiramente diferente da barra */
+            background-color: #002855;
             color: #ccc;
             font-size: 1em;
             box-sizing: border-box;
@@ -114,12 +111,13 @@
         .content-wrapper {
             max-width: 900px;
             margin: 0 auto;
+            padding-bottom: 20px; /* Ajustado para dar espaço ao novo botão */
         }
         .orientations-list {
             background-color: white;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 0 0 5px 5px;
-            margin-top: 0; /* Remove margem superior se estiver logo abaixo da barra de busca */
+            margin-top: 0;
         }
         .orientation-item {
             display: flex;
@@ -129,12 +127,10 @@
             border-bottom: 1px solid #eee;
         }
         .orientation-item:last-child {
-            border-bottom: none;
+            border-bottom: none; /* Se houver botão "Ver menos" abaixo, talvez manter esta borda ou ajustar espaçamento */
         }
         .orientation-info .title { font-weight: bold; font-size: 1.1em; color: #333; }
         .orientation-info .type { font-size: 0.9em; color: #666; }
-
-        /* Estilos para o link de visualização da orientação (antigo botão) */
         .orientation-actions .view-orientation-link {
             background: none;
             border: none;
@@ -149,10 +145,24 @@
             color: #333;
         }
 
-        .page-actions { text-align: center; padding: 20px; }
-        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; margin: 0 10px; }
-        .btn-primary { background-color: #0056b3; color: white; }
-        .btn-secondary { background-color: #6c757d; color: white; }
+        /* Estilo para o botão "Ver menos" */
+        .page-actions-footer {
+            text-align: center;
+            padding: 20px 0; /* Apenas padding vertical */
+            margin-top: 10px; /* Espaço entre a lista e o botão */
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
@@ -160,12 +170,12 @@
     <header class="header">
         <div class="header-logo">
             <button class="hamburger-menu" aria-label="Menu Principal">☰</button>
-            <a href="index.html" aria-label="Página Inicial">
+            <a href="pagina_inicial.html" aria-label="Página Inicial">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/WEG_logo.svg/200px-WEG_logo.svg.png" alt="WEG Logo">
             </a>
         </div>
         <div class="lang-selector">
-            <div class="current-lang" id="currentLangTrigger"> <!-- ID adicionado para JS -->
+            <div class="current-lang" id="currentLangTrigger">
                 <img src="https://flagcdn.com/br.svg" alt="Português" id="current-flag">
                 <span class="arrow">▼</span>
             </div>
@@ -184,7 +194,7 @@
             <h1>Welcome to <img src="https://via.placeholder.com/180x60?text=wegOne" alt="WEG One Logo"></h1>
         </div>
         <div class="search-container-in-bar">
-            <input type="search" placeholder=" Buscar">
+            <input type="search" placeholder=" Buscar em todas as orientações...">
         </div>
     </div>
 
@@ -196,84 +206,123 @@
                     <div class="type">Manual de Operação</div>
                 </div>
                 <div class="orientation-actions">
-                    <a href="orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
                 </div>
             </div>
-
             <div class="orientation-item">
                 <div class="orientation-info">
                     <div class="title">Alternadores Síncronos</div>
                     <div class="type">Procedimento de Segurança</div>
                 </div>
                 <div class="orientation-actions">
-                    <a href="orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
                 </div>
             </div>
-
             <div class="orientation-item">
                 <div class="orientation-info">
                     <div class="title">W22Xec</div>
                     <div class="type">Manual de Conduta</div>
                 </div>
                 <div class="orientation-actions">
-                    <a href="orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
                 </div>
             </div>
-
             <div class="orientation-item">
                 <div class="orientation-info">
                     <div class="title">ESS</div>
                     <div class="type">Manual de Conduta</div>
                 </div>
                 <div class="orientation-actions">
-                    <a href="orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
                 </div>
             </div>
-
             <div class="orientation-item">
                 <div class="orientation-info">
                     <div class="title">Motor WGM20</div>
                     <div class="type">Manual de Operação</div>
                 </div>
                 <div class="orientation-actions">
-                    <a href="orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
                 </div>
             </div>
-
             <div class="orientation-item">
                 <div class="orientation-info">
                     <div class="title">Transformador</div>
                     <div class="type">Procedimento de Segurança</div>
                 </div>
                 <div class="orientation-actions">
-                    <a href="orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
                 </div>
             </div>
-
             <div class="orientation-item">
                 <div class="orientation-info">
-                    <div class="title">Alternadores</div>
+                    <div class="title">Alternadores (Modelo Antigo)</div>
                     <div class="type">Manual de Conduta</div>
                 </div>
                 <div class="orientation-actions">
-                    <a href="orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                </div>
+            </div>
+            <div class="orientation-item">
+                <div class="orientation-info">
+                    <div class="title">Gerador de Energia Série X</div>
+                    <div class="type">Manual de Operação</div>
+                </div>
+                <div class="orientation-actions">
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                </div>
+            </div>
+            <div class="orientation-item">
+                <div class="orientation-info">
+                    <div class="title">Painel de Controle Alpha</div>
+                    <div class="type">Procedimento de Segurança</div>
+                </div>
+                <div class="orientation-actions">
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                </div>
+            </div>
+            <div class="orientation-item">
+                <div class="orientation-info">
+                    <div class="title">Sistema de Automação Beta</div>
+                    <div class="type">Manual de Conduta</div>
+                </div>
+                <div class="orientation-actions">
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                </div>
+            </div>
+            <div class="orientation-item">
+                <div class="orientation-info">
+                    <div class="title">Bomba Hidráulica Gamma</div>
+                    <div class="type">Manutenção e Reparos</div>
+                </div>
+                <div class="orientation-actions">
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
+                </div>
+            </div>
+             <div class="orientation-item">
+                <div class="orientation-info">
+                    <div class="title">Motor Elétrico Delta</div>
+                    <div class="type">Manual de Operação</div>
+                </div>
+                <div class="orientation-actions">
+                    <a href="visualizar_orientacao.html" class="view-orientation-link" title="Visualizar Orientação">≡</a>
                 </div>
             </div>
         </main>
-    </div>
 
-    <div class="page-actions">
-        <button class="btn btn-secondary" onclick="window.location.href='busca.html'">Ver mais</button>
-        <button class="btn btn-primary" onclick="window.location.href='cadastrar.html'">Cadastrar orientação</button>
+        <!-- Botão Ver menos adicionado aqui -->
+        <div class="page-actions-footer">
+            <button class="btn-secondary" onclick="window.location.href='index.html'">Ver menos</button>
+        </div>
     </div>
 
     <script>
-        // Script para funcionalidade do dropdown de idiomas
-        const currentLangTrigger = document.getElementById('currentLangTrigger'); // Usando ID para clareza
+        // Script do dropdown de idiomas (reutilizado)
+        const currentLangTrigger = document.getElementById('currentLangTrigger');
         const langDropdownMenu = document.getElementById('lang-dropdown-menu');
         const currentFlagImg = document.getElementById('current-flag');
 
-        if (currentLangTrigger && langDropdownMenu && currentFlagImg) { // Verifica se os elementos existem
+        if (currentLangTrigger && langDropdownMenu && currentFlagImg) {
             currentLangTrigger.addEventListener('click', function(event) {
                 event.stopPropagation();
                 langDropdownMenu.classList.toggle('show');
@@ -288,21 +337,37 @@
 
                     currentFlagImg.src = selectedFlagSrc;
                     currentFlagImg.alt = selectedFlagAlt;
-                    // Aqui você poderia adicionar lógica para mudar o idioma do conteúdo da página
                     console.log('Idioma selecionado:', selectedLangCode);
-
                     langDropdownMenu.classList.remove('show');
                 });
             });
 
             window.addEventListener('click', function(event) {
-                if (!langDropdownMenu.contains(event.target) && !currentLangTrigger.contains(event.target)) {
+                if (langDropdownMenu && !langDropdownMenu.contains(event.target) && currentLangTrigger && !currentLangTrigger.contains(event.target)) {
                     if (langDropdownMenu.classList.contains('show')) {
                         langDropdownMenu.classList.remove('show');
                     }
                 }
             });
         }
+
+        // JavaScript para filtro (ainda comentado, para implementação futura)
+        // const searchInput = document.querySelector('.search-container-in-bar input[type="search"]');
+        // const orientationItems = document.querySelectorAll('.orientations-list .orientation-item');
+        // if(searchInput && orientationItems.length > 0) {
+        //     searchInput.addEventListener('keyup', function() {
+        //         const filter = searchInput.value.toUpperCase().trim();
+        //         orientationItems.forEach(item => {
+        //             const title = item.querySelector('.orientation-info .title').textContent.toUpperCase();
+        //             const type = item.querySelector('.orientation-info .type').textContent.toUpperCase();
+        //             if (title.includes(filter) || type.includes(filter)) {
+        //                 item.style.display = "";
+        //             } else {
+        //                 item.style.display = "none";
+        //             }
+        //         });
+        //     });
+        // }
     </script>
 </body>
 </html>
