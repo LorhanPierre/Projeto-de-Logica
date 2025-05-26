@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,19 +30,19 @@
             <a class="btn-translator" href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Abrir tradutor on-line</a>
         </div>
 
-        <form id="orientation-form">
+        <form action="">
             <input type="hidden" id="orientation-id" name="orientation-id">
             <div class="form-main-grid">
                 <div class="form-sections">
                     <div class="form-group">
                         <label for="title-pt">Orientação em Português</label>
-                        <input type="text" id="title-pt" name="title-pt" placeholder="Título">
-                        <textarea id="orientation-pt" name="orientation-pt" placeholder="Orientação"></textarea>
+                        <input type="text" class="title-pt" name="title-pt" placeholder="Título">
+                        <textarea class="orientation-pt" name="orientation-pt" placeholder="Orientação"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="title-en">Orientação em Inglês</label>
-                        <input type="text" id="title-en" name="title-en" placeholder="Título">
+                        <input type="text" class="title-en" name="title-en" placeholder="Título">
                         <textarea id="orientation-en" name="orientation-en" placeholder="Orientação"></textarea>
                     </div>
 
@@ -92,6 +93,6 @@
                 <button class="btn modal-btn-cancel" id="modal-cancel-save">Cancelar</button>
             </div>
         </div>
-    </div>\
+    </div>
 </body>
 </html>
